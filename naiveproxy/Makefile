@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=naiveproxy
 PKG_VERSION:=91.0.4472.77-1
-PKG_RELEASE:=3
+PKG_RELEASE:=4
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/klzgrad/naiveproxy/tar.gz/v$(PKG_VERSION)?
@@ -24,14 +24,14 @@ PKG_USE_MIPS16:=0
 PKG_BUILD_PARALLEL:=1
 
 ifneq ($(CONFIG_CPU_TYPE)," ")
-	CPU_TYPE:=$(word 1, $(subst +," ,$(CONFIG_CPU_TYPE)))
-	CPU_SUBTYPE:=$(word 2, $(subst +, ",$(CONFIG_CPU_TYPE)))
-	ifeq ($(CPU_SUBTYPE),)
-		CPU_SUBTYPE:=""
-	endif
+  CPU_TYPE:=$(word 1, $(subst +," ,$(CONFIG_CPU_TYPE)))
+  CPU_SUBTYPE:=$(word 2, $(subst +, ",$(CONFIG_CPU_TYPE)))
+  ifeq ($(CPU_SUBTYPE),)
+    CPU_SUBTYPE:=""
+  endif
 else
-	CPU_TYPE:=""
-	CPU_SUBTYPE:=""
+  CPU_TYPE:=""
+  CPU_SUBTYPE:=""
 endif
 
 include $(INCLUDE_DIR)/package.mk
@@ -56,10 +56,10 @@ define Package/naiveproxy/description
 endef
 
 ifneq ($(CONFIG_CCACHE),)
-	export CCACHE_SLOPPINESS=time_macros
-	export CCACHE_BASEDIR=$(PKG_BUILD_DIR)/src
-	export CCACHE_CPP2=yes
-	export naive_ccache_flags=cc_wrapper="$(CCACHE)"
+  export CCACHE_SLOPPINESS=time_macros
+  export CCACHE_BASEDIR=$(PKG_BUILD_DIR)/src
+  export CCACHE_CPP2=yes
+  export naive_ccache_flags=cc_wrapper="$(CCACHE)"
 endif
 
 CLANG_VER:=llvmorg-13-init-6429-g0e92cbd6-2
@@ -115,8 +115,8 @@ endif
 define Build/Compile
 	( \
 		cd "$(PKG_BUILD_DIR)/src" ; \
-		. ../init_env.sh "$(ARCH)" "$(BOARD)" $(CPU_TYPE) $(CPU_SUBTYPE) "$(TOOLCHAIN_DIR)" ; \
-		export naive_flags="$$$${naive_flags} $$$${naive_ccache_flags}" ; \
+		. ../init_env.sh "$(ARCH)" $(CPU_TYPE) $(CPU_SUBTYPE) "$(TOOLCHAIN_DIR)" ; \
+		export naive_flags+=" $$$${naive_ccache_flags}" ; \
 		mkdir -p "out" ; \
 		./gn/out/gn gen "out/Release" --args="$$$${naive_flags}" --script-executable="$(PYTHON)" ; \
 	)
