@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=naiveproxy
 PKG_VERSION:=101.0.4951.41-1
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/klzgrad/naiveproxy/tar.gz/v$(PKG_VERSION)?
@@ -66,13 +66,13 @@ define Download/CLANG
 	HASH:=26d8c347253528e6dca471fa040d0e5e0f8eb55e6ec9671a673b88c723330a21
 endef
 
-GN_VER:=53ef169800760fdc09f0773bf380fe99eaeab339
+GN_VER:=bd99dbf98cbdefe18a4128189665c5761263bcfb
 GN_FILE:=gn-git_revision-$(GN_VER).zip
 define Download/GN_TOOL
 	URL:=https://chrome-infra-packages.appspot.com/dl/gn/gn/linux-amd64/+
 	URL_FILE:=git_revision:$(GN_VER)
 	FILE:=$(GN_FILE)
-	HASH:=beb261220f4195109297b1658212d041ffebef5a88b3194219659cf197840f77
+	HASH:=5cf71266ed05c63a74a67f21cc704699ae2da97ebb935707ce59bb23d318388e
 endef
 
 PGO_VER:=4951-1650389737-545882ae3e5c9e7f75e0781c8dc0d1eafb667efd
